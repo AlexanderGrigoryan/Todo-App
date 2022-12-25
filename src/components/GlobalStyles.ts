@@ -1,4 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
 
 * {
   margin: 0;
@@ -14,4 +16,7 @@ body {
 .App {
   width: 100vw;
   height: 100vh;
-} */
+}
+`;
+
+export default GlobalStyles;
