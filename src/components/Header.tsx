@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import lightBackground from "../img/bg-mobile-light.jpg";
 import darkBackground from "../img/bg-mobile-dark.jpg";
 import logo from "../img/icon-logo.svg";
@@ -29,13 +29,17 @@ function Header(props: {
 export default Header;
 
 const Container = styled.div(
-  (props: { theme: boolean }) => css`
-    background: url(${props.theme ? lightBackground : darkBackground});
+  (props: { theme: boolean }) => `
+    background: url(${
+      typeof props.theme === "boolean" && props.theme
+        ? darkBackground
+        : lightBackground
+    });
     height: 200px;
     width: 100%;
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 48px 24px 0 24px; ;
+    padding: 48px 24px 0 24px;
   `
 );
 
