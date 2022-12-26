@@ -2,10 +2,26 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import check from "../img/icon-check.svg";
+import { Todo } from "../types";
 
-function CreateToDo() {
+function CreateToDo(props: {
+  todoValue: string;
+  setTodoValue: React.Dispatch<React.SetStateAction<string>>;
+  todoList: Todo[];
+  setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
+}) {
   const [checked, setChecked] = useState<boolean>(false);
 
+  const addTodo = (event: any) => {
+    event.preventDefault();
+    props.setTodoList([
+      ...props.todoList,
+      { note: props.todoValue, completed: false, id: Math.random() * 1000 },
+    ]);
+    props.setTodoValue("");
+  };
+
+  console.log(props.todoList);
   return (
     <Container>
       <Content>
@@ -17,7 +33,16 @@ function CreateToDo() {
         >
           {checked ? <Image src={check} alt="checked" /> : null}
         </CheckBox>
-        <Input type="text" placeholder="Create a new todo…" />
+        <Form onSubmit={addTodo}>
+          <Input
+            value={props.todoValue}
+            onChange={(event) => {
+              props.setTodoValue(event.target.value);
+            }}
+            type="text"
+            placeholder="Create a new todo…"
+          />
+        </Form>
       </Content>
     </Container>
   );
@@ -27,11 +52,10 @@ export default CreateToDo;
 
 const Container = styled.div`
   width: 327px;
-  margin-top: -90px;
+  margin-top: -110px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 24px;
 `;
 
 const Content = styled.div`
@@ -45,8 +69,10 @@ const Content = styled.div`
   box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
 `;
 
+const Form = styled.form``;
+
 const Input = styled.input`
-  width: 275px;
+  width: 200px;
   border-radius: 5px;
   border: none;
   outline: none;
