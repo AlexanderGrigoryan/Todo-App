@@ -7,39 +7,35 @@ import deleteIcon from "../img/icon-cross-small.svg";
 function TodoList(props: {
   todoList: Todo[];
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todoId: string;
+  todoNote: string;
 }): JSX.Element {
+  const deleteTodo = () => {
+    const todoData = [...props.todoList];
+    const deleteTodo = todoData.findIndex(
+      (element: Todo) => element.id === props.todoId
+    );
+    todoData.splice(deleteTodo, 1);
+    props.setTodoList(todoData);
+  };
+
   return (
-    <Container>
-      {props.todoList.map((todo) => {
-        return (
-          <>
-            <Content>
-              <ContentInner>
-                <CheckBox />
-                <Note>{todo.note}</Note>
-              </ContentInner>
-              <Delete>
-                <Icon src={deleteIcon} alt="delete icon" />
-              </Delete>
-            </Content>
-            <Line></Line>
-          </>
-        );
-      })}
-    </Container>
+    <>
+      <Content>
+        <ContentInner>
+          <CheckBox />
+          <Note>{props.todoNote}</Note>
+        </ContentInner>
+        <Delete onClick={deleteTodo}>
+          <Icon src={deleteIcon} alt="delete icon" />
+        </Delete>
+      </Content>
+      <Line></Line>
+    </>
   );
 }
 
 export default TodoList;
-
-const Container = styled.div`
-  width: 279px;
-  height: 368px;
-  background: #ffffff;
-  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
-  border-radius: 5px;
-  margin-top: 15px;
-`;
 
 const Content = styled.div`
   display: flex;
@@ -73,7 +69,7 @@ const Delete = styled.button`
 const Icon = styled.img``;
 
 const Line = styled.div`
-  width: 279px;
+  width: 327px;
   height: 1px;
   background: #e3e4f1;
 `;

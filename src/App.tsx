@@ -12,7 +12,6 @@ function App() {
   const [theme, setTheme] = useState<boolean>(false);
   const [todoValue, setTodoValue] = useState<string>("");
   const [todoList, setTodoList] = useState<Todo[]>([]);
-  
 
   return (
     <>
@@ -27,15 +26,26 @@ function App() {
       </HelmetProvider>
 
       <div className="App">
+        <Header theme={theme} setTheme={setTheme} />
         <Container>
-          <Header theme={theme} setTheme={setTheme} />
           <CreateToDo
             todoValue={todoValue}
             setTodoValue={setTodoValue}
             todoList={todoList}
             setTodoList={setTodoList}
           />
-          <TodoList todoList={todoList} setTodoList={setTodoList} />
+          <ListContainer>
+            {todoList.map((todo) => {
+              return (
+                <TodoList
+                  todoNote={todo.note}
+                  todoId={todo.id}
+                  todoList={todoList}
+                  setTodoList={setTodoList}
+                />
+              );
+            })}
+          </ListContainer>
         </Container>
       </div>
     </>
@@ -50,4 +60,13 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+`;
+
+const ListContainer = styled.div`
+  width: 327px;
+  min-height: 368px;
+  background: #ffffff;
+  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+  border-radius: 5px;
+  margin-top: 15px;
 `;

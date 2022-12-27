@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Todo } from "../types";
 import CheckBox from "./CheckBox";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 function CreateToDo(props: {
   todoValue: string;
@@ -43,14 +43,14 @@ export default CreateToDo;
 
 const Container = styled.div`
   width: 327px;
-  margin-top: -110px;
+  margin-top: -95px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const Content = styled.div`
-  width: 279px;
+  width: 327px;
   height: 48px;
   padding: 0 24px;
   border-radius: 5px;

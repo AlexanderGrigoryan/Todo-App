@@ -39,7 +39,7 @@ const Container = styled.div(
     width: 100%;
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 38px 24px 0 24px;
+    padding: 48px 24px 0 24px;
   `
 );
 
