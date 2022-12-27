@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
-import check from "../img/icon-check.svg";
 import { Todo } from "../types";
+import CheckBox from "./CheckBox";
+import { v4 as uuidv4 } from 'uuid'
 
 function CreateToDo(props: {
   todoValue: string;
@@ -10,13 +10,11 @@ function CreateToDo(props: {
   todoList: Todo[];
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
 }) {
-  const [checked, setChecked] = useState<boolean>(false);
-
   const addTodo = (event: any) => {
     event.preventDefault();
     props.setTodoList([
       ...props.todoList,
-      { note: props.todoValue, completed: false, id: Math.random() * 1000 },
+      { note: props.todoValue, completed: false, id: uuidv4() },
     ]);
     props.setTodoValue("");
   };
@@ -25,14 +23,7 @@ function CreateToDo(props: {
   return (
     <Container>
       <Content>
-        <CheckBox
-          checked={checked}
-          onClick={() => {
-            setChecked(!checked);
-          }}
-        >
-          {checked ? <Image src={check} alt="checked" /> : null}
-        </CheckBox>
+        <CheckBox />
         <Form onSubmit={addTodo}>
           <Input
             value={props.todoValue}
@@ -83,26 +74,3 @@ const Input = styled.input`
   letter-spacing: -0.1666666716337204px;
   color: #9495a5;
 `;
-
-const Image = styled.img`
-  width: 8.7px;
-  height: 6px;
-`;
-
-const CheckBox = styled.button(
-  (props: { checked: boolean }) => `
-  width: 20px;
-  height: 20px;
-  margin-right: 12px; 
-  border: ${props.checked ? "none" : "1px solid #e3e4f1"} ;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: .2s;
-  background: ${
-    props.checked ? "linear-gradient(135deg, #55ddff 0%, #c058f3 100%)" : "none"
-  };
-`
-);
