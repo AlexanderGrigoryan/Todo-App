@@ -53,7 +53,7 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 21px 24px;
+  padding: 19px 24px 21px 24px;
 `;
 
 const ContentInner = styled.div`

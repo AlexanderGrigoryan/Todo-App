@@ -7,6 +7,7 @@ import { useState } from "react";
 import CreateToDo from "./components/CreateToDo";
 import { Todo } from "./types";
 import TodoList from "./components/TodoList";
+import ClearBox from "./components/ClearBox";
 
 function App() {
   const [theme, setTheme] = useState<boolean>(false);
@@ -46,6 +47,7 @@ function App() {
                 />
               );
             })}
+            <ClearBox todoList={todoList} setTodoList={setTodoList} />
           </ListContainer>
         </Container>
       </div>
@@ -65,7 +67,6 @@ const Container = styled.div`
 
 const ListContainer = styled.div`
   width: 327px;
-  min-height: 368px;
   background: #ffffff;
   box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
   border-radius: 5px;

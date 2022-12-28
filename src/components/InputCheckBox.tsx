@@ -7,7 +7,7 @@ interface Props {
   setCompleted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function HeaderCheckBox(props: Props) {
+function InputCheckBox(props: Props) {
   const { completed, setCompleted } = props;
   return (
     <Content
@@ -21,7 +21,7 @@ function HeaderCheckBox(props: Props) {
   );
 }
 
-export default HeaderCheckBox;
+export default InputCheckBox;
 
 const Image = styled.img`
   width: 8.7px;

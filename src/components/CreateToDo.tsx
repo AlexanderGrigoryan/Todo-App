@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Todo } from "../types";
-import HeaderCheckBox from "./HeaderCheckBox";
+import InputCheckBox from "./InputCheckBox";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 function CreateToDo(props: {
@@ -26,7 +26,7 @@ function CreateToDo(props: {
   return (
     <Container>
       <Content>
-        <HeaderCheckBox completed={completed} setCompleted={setCompleted} />
+        <InputCheckBox completed={completed} setCompleted={setCompleted} />
         <Form onSubmit={addTodo}>
           <Input
             value={props.todoValue}
