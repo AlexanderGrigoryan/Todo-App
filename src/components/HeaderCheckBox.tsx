@@ -1,33 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import check from "../img/icon-check.svg";
-import { Todo } from "../types";
 
 interface Props {
   completed: boolean;
-  todoList: Todo[];
-  setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
-  id: string;
+  setCompleted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CheckBox(props: Props) {
-  const { completed, todoList, setTodoList, id } = props;
-
-  const updateCheckBox = () => {
-    const updatedState = [...todoList];
-    const stateIndex = updatedState.findIndex((element) => element.id === id);
-    updatedState[stateIndex].completed = !completed;
-    setTodoList(updatedState);
-  };
-
+function HeaderCheckBox(props: Props) {
+  const { completed, setCompleted } = props;
   return (
-    <Content completed={completed} onClick={updateCheckBox}>
-      {props.completed ? <Image src={check} alt="checked" /> : null}
+    <Content
+      completed={completed}
+      onClick={() => {
+        setCompleted(!completed);
+      }}
+    >
+      {completed ? <Image src={check} alt="checked" /> : null}
     </Content>
   );
 }
 
-export default CheckBox;
+export default HeaderCheckBox;
 
 const Image = styled.img`
   width: 8.7px;

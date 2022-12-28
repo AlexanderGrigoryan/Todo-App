@@ -1,29 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import { Todo } from "../types";
-import CheckBox from "./CheckBox";
+import HeaderCheckBox from "./HeaderCheckBox";
 import { v4 as uuidv4 } from "uuid";
-
+import { useState } from "react";
 function CreateToDo(props: {
   todoValue: string;
   setTodoValue: React.Dispatch<React.SetStateAction<string>>;
   todoList: Todo[];
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
 }) {
+  const [completed, setCompleted] = useState<boolean>(false);
+
   const addTodo = (event: any) => {
     event.preventDefault();
     props.setTodoList([
       ...props.todoList,
-      { note: props.todoValue, completed: false, id: uuidv4() },
+      { note: props.todoValue, completed: completed, id: uuidv4() },
     ]);
     props.setTodoValue("");
+    setCompleted(false);
   };
 
   console.log(props.todoList);
   return (
     <Container>
       <Content>
-        <CheckBox />
+        <HeaderCheckBox completed={completed} setCompleted={setCompleted} />
         <Form onSubmit={addTodo}>
           <Input
             value={props.todoValue}

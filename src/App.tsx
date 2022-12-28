@@ -38,8 +38,9 @@ function App() {
             {todoList.map((todo) => {
               return (
                 <TodoList
-                  todoNote={todo.note}
-                  todoId={todo.id}
+                  note={todo.note}
+                  id={todo.id}
+                  completed={todo.completed}
                   todoList={todoList}
                   setTodoList={setTodoList}
                 />
