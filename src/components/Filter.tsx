@@ -6,13 +6,14 @@ import { css } from "styled-components";
 interface Props {
   filtered: string;
   setFiltered: React.Dispatch<React.SetStateAction<string>>;
+  theme: boolean;
 }
 
 function Filter(props: Props) {
-  const { filtered, setFiltered } = props;
+  const { filtered, setFiltered, theme } = props;
 
   return (
-    <Container>
+    <Container theme={theme}>
       <Content>
         <All filtered={filtered} onClick={() => setFiltered("All")}>
           All
@@ -30,14 +31,18 @@ function Filter(props: Props) {
 
 export default Filter;
 
-const Container = styled.div`
-  width: 100%;
-  height: 48px;
-  background: #ffffff;
-  box-shadow: 0px 35px 50px -15px #c2c3d680;
-  border-radius: 5px;
- 
-`;
+const Container = styled.div(
+  (props) => css`
+    width: 327px;
+    height: 48px;
+    background: ${typeof props.theme === "boolean" && props.theme
+      ? "#25273D"
+      : "#ffffff"};
+    box-shadow: 0px 35px 50px -15px #c2c3d680;
+    border-radius: 5px;
+    margin-top: 15px;
+  `
+);
 
 const Content = styled.div`
   display: flex;

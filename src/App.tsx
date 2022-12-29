@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import GlobalStyles from "./components/GlobalStyles";
 import Header from "./components/Header";
 import CreateToDo from "./components/CreateToDo";
@@ -24,10 +24,9 @@ function App() {
       : true
   );
 
-  console.log(filterResult);
   return (
     <>
-      <GlobalStyles />
+      <GlobalStyles theme={theme} />
       <HelmetProvider>
         <Helmet>
           <link
@@ -48,7 +47,7 @@ function App() {
             theme={theme}
             setTheme={setTheme}
           />
-          <ListContainer>
+          <ListContainer theme={theme}>
             {filterResult.map((todo) => {
               return (
                 <TodoList
@@ -58,12 +57,13 @@ function App() {
                   completed={todo.completed}
                   todoList={todoList}
                   setTodoList={setTodoList}
+                  theme={theme}
                 />
               );
             })}
             <ClearBox todoList={todoList} setTodoList={setTodoList} />
           </ListContainer>
-          <Filter filtered={filtered} setFiltered={setFiltered} />
+          <Filter theme={theme} filtered={filtered} setFiltered={setFiltered} />
         </Container>
       </div>
     </>
@@ -80,10 +80,14 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ListContainer = styled.div`
-  width: 327px;
-  background: #ffffff;
-  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
-  border-radius: 5px;
-  margin-top: 15px;
-`;
+const ListContainer = styled.div(
+  (props: { theme: boolean }) => css`
+    width: 327px;
+    background: ${typeof props.theme === "boolean" && props.theme
+      ? "#25273D"
+      : "#ffffff"};
+    box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+    border-radius: 5px;
+    margin-top: 15px;
+  `
+);

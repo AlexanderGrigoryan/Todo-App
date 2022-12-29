@@ -31,7 +31,11 @@ function CreateToDo(props: Props) {
   return (
     <Container theme={theme}>
       <Content>
-        <InputCheckBox completed={completed} setCompleted={setCompleted} />
+        <InputCheckBox
+          completed={completed}
+          setCompleted={setCompleted}
+          theme={theme}
+        />
         <Form onSubmit={addTodo}>
           <Input
             theme={theme}
@@ -54,30 +58,30 @@ const Container = styled.div(
   (props: { theme: boolean }) => css`
     width: 327px;
     margin-top: -95px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: ${props.theme ? "#25273D" : "#ffffff"};
+    box-shadow: ${typeof props.theme === "boolean" && props.theme
+      ? "0px 35px 50px -15px #00000080;"
+      : "0px 35px 50px -15px #c2c3d680"};
+    background: ${typeof props.theme === "boolean" && props.theme
+      ? "#25273D"
+      : "#ffffff"};
   `
 );
 
-const Content = styled.div(
-  (props: { theme: boolean }) => css`
-    width: 327px;
-    height: 48px;
-    padding: 0 24px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-  `
-);
-
+const Content = styled.div`
+  width: 327px;
+  height: 48px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+`;
 const Form = styled.form``;
 
-
-const Input = styled.input((props: { theme: boolean }) => {
-  console.log(props.theme);
-  return css`
+const Input = styled.input(
+  (props: { theme: boolean }) => css`
     width: 200px;
     border-radius: 5px;
     border: none;
@@ -87,8 +91,10 @@ const Input = styled.input((props: { theme: boolean }) => {
     font-weight: 400;
     line-height: 12px;
     letter-spacing: -0.1666666716337204px;
-    color: #9495a5;
+    color: ${typeof props.theme === "boolean" && props.theme
+      ? "#767992"
+      : "#9495a5"};
     background: transparent;
     box-shadow: 0px 35px 50px -15px #c2c3d680;
-  `;
-});
+  `
+);

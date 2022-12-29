@@ -11,10 +11,11 @@ interface Props {
   id: string;
   note: string;
   completed: boolean;
+  theme: boolean;
 }
 
 function TodoList(props: Props) {
-  const { todoList, setTodoList, id, note, completed } = props;
+  const { todoList, setTodoList, id, note, completed, theme } = props;
   {
     const deleteTodo = () => {
       const todoData = [...todoList];
@@ -41,7 +42,7 @@ function TodoList(props: Props) {
             <Icon src={deleteIcon} alt="delete icon" />
           </Delete>
         </Content>
-        <Line></Line>
+        <Line theme={theme}></Line>
       </>
     );
   }
@@ -77,6 +78,7 @@ const Delete = styled.button`
   width: 12px;
   height: 12px;
   border: 0;
+  background: inherit;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -85,8 +87,12 @@ const Delete = styled.button`
 
 const Icon = styled.img``;
 
-const Line = styled.div`
-  width: 327px;
-  height: 1px;
-  background: #e3e4f1;
-`;
+const Line = styled.div(
+  (props) => css`
+    width: 327px;
+    height: 1px;
+    background: ${typeof props.theme === "boolean" && props.theme
+      ? "#393A4B"
+      : "#e3e4f1"};
+  `
+);

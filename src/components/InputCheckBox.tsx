@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import check from "../img/icon-check.svg";
 
 interface Props {
   completed: boolean;
   setCompleted: React.Dispatch<React.SetStateAction<boolean>>;
+  theme: boolean;
 }
 
 function InputCheckBox(props: Props) {
-  const { completed, setCompleted } = props;
+  const { completed, setCompleted, theme } = props;
   return (
     <Content
       completed={completed}
@@ -28,8 +29,13 @@ const Image = styled.img`
   height: 6px;
 `;
 
+interface ContentProps {
+  completed: boolean;
+  theme: boolean;
+}
+
 const Content = styled.button(
-  (props: { completed: boolean }) => `
+  (props: ContentProps) => css`
   width: 20px;
   height: 20px;
   margin-right: 12px; 
