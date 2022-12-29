@@ -22,7 +22,6 @@ function CreateToDo(props: {
     setCompleted(false);
   };
 
-  console.log(props.todoList);
   return (
     <Container>
       <Content>

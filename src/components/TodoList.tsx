@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Todo } from "../types";
 import CheckBox from "./CheckBox";
 import deleteIcon from "../img/icon-cross-small.svg";
+import { Todo } from "../types";
 import { useState } from "react";
 
 interface Props {

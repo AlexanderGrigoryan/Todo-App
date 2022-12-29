@@ -1,19 +1,30 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "./components/Header";
 import GlobalStyles from "./components/GlobalStyles";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useState } from "react";
+import Header from "./components/Header";
 import CreateToDo from "./components/CreateToDo";
-import { Todo } from "./types";
 import TodoList from "./components/TodoList";
 import ClearBox from "./components/ClearBox";
+import Filter from "./components/Filter";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useState } from "react";
+import { Todo } from "./types";
 
 function App() {
   const [theme, setTheme] = useState<boolean>(false);
   const [todoValue, setTodoValue] = useState<string>("");
   const [todoList, setTodoList] = useState<Todo[]>([]);
+  const [filtered, setFiltered] = useState<string>("All");
 
+  const filterResult = [...todoList].filter((element) =>
+    filtered === "Active"
+      ? !element.completed
+      : filtered === "Completed"
+      ? element.completed
+      : true
+  );
+
+  console.log(filterResult);
   return (
     <>
       <GlobalStyles />
@@ -36,9 +47,10 @@ function App() {
             setTodoList={setTodoList}
           />
           <ListContainer>
-            {todoList.map((todo) => {
+            {filterResult.map((todo) => {
               return (
                 <TodoList
+                  key={todo.id}
                   note={todo.note}
                   id={todo.id}
                   completed={todo.completed}
@@ -49,6 +61,7 @@ function App() {
             })}
             <ClearBox todoList={todoList} setTodoList={setTodoList} />
           </ListContainer>
+          <Filter filtered={filtered} setFiltered={setFiltered} />
         </Container>
       </div>
     </>
