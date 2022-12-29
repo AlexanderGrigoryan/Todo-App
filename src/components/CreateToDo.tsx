@@ -1,36 +1,43 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Todo } from "../types";
 import InputCheckBox from "./InputCheckBox";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-function CreateToDo(props: {
+
+interface Props {
   todoValue: string;
   setTodoValue: React.Dispatch<React.SetStateAction<string>>;
   todoList: Todo[];
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
-}) {
-  const [completed, setCompleted] = useState<boolean>(false);
+  theme: boolean;
+  setTheme: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+function CreateToDo(props: Props) {
+  const { todoValue, setTodoValue, todoList, setTodoList, theme, setTheme } =
+    props;
+
+  const [completed, setCompleted] = useState<boolean>(false);
   const addTodo = (event: any) => {
     event.preventDefault();
-    props.setTodoList([
-      ...props.todoList,
-      { note: props.todoValue, completed: completed, id: uuidv4() },
+    setTodoList([
+      ...todoList,
+      { note: todoValue, completed: completed, id: uuidv4() },
     ]);
-    props.setTodoValue("");
+    setTodoValue("");
     setCompleted(false);
   };
-
   return (
-    <Container>
+    <Container theme={theme}>
       <Content>
         <InputCheckBox completed={completed} setCompleted={setCompleted} />
         <Form onSubmit={addTodo}>
           <Input
-            value={props.todoValue}
+            theme={theme}
+            value={todoValue}
             onChange={(event) => {
-              props.setTodoValue(event.target.value);
+              setTodoValue(event.target.value);
             }}
             type="text"
             placeholder="Create a new todo…"
@@ -43,36 +50,45 @@ function CreateToDo(props: {
 
 export default CreateToDo;
 
-const Container = styled.div`
-  width: 327px;
-  margin-top: -95px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const Container = styled.div(
+  (props: { theme: boolean }) => css`
+    width: 327px;
+    margin-top: -95px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: ${props.theme ? "#25273D" : "#ffffff"};
+  `
+);
 
-const Content = styled.div`
-  width: 327px;
-  height: 48px;
-  padding: 0 24px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
-`;
+const Content = styled.div(
+  (props: { theme: boolean }) => css`
+    width: 327px;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  `
+);
 
 const Form = styled.form``;
 
-const Input = styled.input`
-  width: 200px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 12px;
-  letter-spacing: -0.1666666716337204px;
-  color: #9495a5;
-`;
+
+const Input = styled.input((props: { theme: boolean }) => {
+  console.log(props.theme);
+  return css`
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: -0.1666666716337204px;
+    color: #9495a5;
+    background: transparent;
+    box-shadow: 0px 35px 50px -15px #c2c3d680;
+  `;
+});

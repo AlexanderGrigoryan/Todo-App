@@ -45,6 +45,8 @@ function App() {
             setTodoValue={setTodoValue}
             todoList={todoList}
             setTodoList={setTodoList}
+            theme={theme}
+            setTheme={setTheme}
           />
           <ListContainer>
             {filterResult.map((todo) => {

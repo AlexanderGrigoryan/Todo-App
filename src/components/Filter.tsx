@@ -36,26 +36,16 @@ const Container = styled.div`
   background: #ffffff;
   box-shadow: 0px 35px 50px -15px #c2c3d680;
   border-radius: 5px;
-  margin-top: 16px;
+ 
 `;
 
 const Content = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   column-gap: 18px;
+  padding-top: 18px;
 `;
-
-// const Note = styled.p(
-//   (props: { completed: boolean }) => css`
-//     font-family: "Josefin Sans", sans-serif;
-//     font-size: 18px;
-//     font-weight: 400;
-//     line-height: 18px;
-//     letter-spacing: -0.25px;
-//     color: ${props.completed ? "#D1D2DA" : "#494c6b"};
-//     text-decoration: ${props.completed ? "line-through" : "none"};
-//   `
-// );
 
 const All = styled.button(
   (props: { filtered: string }) => css`

@@ -29,6 +29,7 @@ export default ClearBox;
 
 const Container = styled.div`
   padding: 16px 20px 22px 20px;
+  margin-bottom: 15px;
 `;
 
 const Content = styled.div`
