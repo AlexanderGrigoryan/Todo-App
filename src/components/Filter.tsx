@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Todo } from "../types";
 import { css } from "styled-components";
 
 interface Props {
@@ -15,13 +14,25 @@ function Filter(props: Props) {
   return (
     <Container theme={theme}>
       <Content>
-        <All filtered={filtered} onClick={() => setFiltered("All")}>
+        <All
+          filtered={filtered}
+          theme={theme}
+          onClick={() => setFiltered("All")}
+        >
           All
         </All>
-        <Active filtered={filtered} onClick={() => setFiltered("Active")}>
+        <Active
+          filtered={filtered}
+          theme={theme}
+          onClick={() => setFiltered("Active")}
+        >
           Active
         </Active>
-        <Completed filtered={filtered} onClick={() => setFiltered("Completed")}>
+        <Completed
+          filtered={filtered}
+          theme={theme}
+          onClick={() => setFiltered("Completed")}
+        >
           Completed
         </Completed>
       </Content>
@@ -33,14 +44,19 @@ export default Filter;
 
 const Container = styled.div(
   (props) => css`
-    width: 327px;
+    width: 100%;
     height: 48px;
+    border-radius: 5px;
     background: ${typeof props.theme === "boolean" && props.theme
       ? "#25273D"
       : "#ffffff"};
-    box-shadow: 0px 35px 50px -15px #c2c3d680;
-    border-radius: 5px;
-    margin-top: 15px;
+    box-shadow: ${typeof props.theme === "boolean" && props.theme
+      ? "0px 35px 50px -15px #00000080"
+      : "0px 35px 50px -15px #c2c3d680"};
+
+    @media screen and (min-width: 768px) {
+      box-shadow: none;
+    }
   `
 );
 

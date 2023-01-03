@@ -11,22 +11,24 @@ interface Props {
   todoList: Todo[];
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
   theme: boolean;
-  setTheme: React.Dispatch<React.SetStateAction<boolean>>;
+  
 }
 
 function CreateToDo(props: Props) {
-  const { todoValue, setTodoValue, todoList, setTodoList, theme, setTheme } =
+  const { todoValue, setTodoValue, todoList, setTodoList, theme} =
     props;
 
   const [completed, setCompleted] = useState<boolean>(false);
-  const addTodo = (event: any) => {
+  const addTodo: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    setTodoList([
-      ...todoList,
-      { note: todoValue, completed: completed, id: uuidv4() },
-    ]);
-    setTodoValue("");
-    setCompleted(false);
+    if (todoValue.length > 0) {
+      setTodoList([
+        ...todoList,
+        { note: todoValue, completed: completed, id: uuidv4() },
+      ]);
+      setTodoValue("");
+      setCompleted(false);
+    }
   };
   return (
     <Container theme={theme}>
@@ -56,7 +58,8 @@ export default CreateToDo;
 
 const Container = styled.div(
   (props: { theme: boolean }) => css`
-    width: 327px;
+    max-width: 540px;
+    width: 100%;
     margin-top: -95px;
     border-radius: 5px;
     display: flex;
@@ -72,12 +75,18 @@ const Container = styled.div(
 );
 
 const Content = styled.div`
-  width: 327px;
+  max-width: 540px;
+  width: 100%;
   height: 48px;
   padding: 0 24px;
   display: flex;
   align-items: center;
+
+  @media screen and (min-width: 768px) {
+    height: 64px;
+  }
 `;
+
 const Form = styled.form``;
 
 const Input = styled.input(
@@ -92,9 +101,21 @@ const Input = styled.input(
     line-height: 12px;
     letter-spacing: -0.1666666716337204px;
     color: ${typeof props.theme === "boolean" && props.theme
-      ? "#767992"
-      : "#9495a5"};
+      ? "#C8CBE7"
+      : "#393A4B"};
     background: transparent;
     box-shadow: 0px 35px 50px -15px #c2c3d680;
+
+    &::placeholder {
+      color: ${typeof props.theme === "boolean" && props.theme
+        ? "#767992"
+        : "#9495a5"};
+    }
+
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+      line-height: 18px;
+      letter-spacing: -0.25px;
+    }
   `
 );

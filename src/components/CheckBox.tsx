@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 import check from "../img/icon-check.svg";
 import { Todo } from "../types";
 
@@ -35,21 +35,24 @@ const Image = styled.img`
 `;
 
 const Content = styled.button(
-  (props: { completed: boolean }) => `
-  width: 20px;
-  height: 20px;
-  margin-right: 12px; 
-  border: ${props.completed ? "none" : "1px solid #e3e4f1"} ;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: .2s;
-  background: ${
-    props.completed
+  (props: { completed: boolean }) => css`
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 12px;
+    border: ${props.completed ? "none" : "1px solid #e3e4f1"};
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    background: ${props.completed
       ? "linear-gradient(135deg, #55ddff 0%, #c058f3 100%)"
-      : "none"
-  };
-`
+      : "none"};
+
+    @media screen and (min-width: 768px) {
+      min-width: 24px;
+      min-height: 24px;
+    }
+  `
 );

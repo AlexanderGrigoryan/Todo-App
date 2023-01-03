@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import check from "../img/icon-check.svg";
 
@@ -10,6 +10,7 @@ interface Props {
 
 function InputCheckBox(props: Props) {
   const { completed, setCompleted, theme } = props;
+  
   return (
     <Content
       completed={completed}
@@ -36,20 +37,31 @@ interface ContentProps {
 
 const Content = styled.button(
   (props: ContentProps) => css`
-  width: 20px;
-  height: 20px;
-  margin-right: 12px; 
-  border: ${props.completed ? "none" : "1px solid #e3e4f1"} ;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: .2s;
-  background: ${
-    props.completed
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    background: ${props.completed
       ? "linear-gradient(135deg, #55ddff 0%, #c058f3 100%)"
-      : "none"
-  };
-`
+      : "none"};
+    border: ${props.completed && props.theme
+      ? "none"
+      : !props.completed && !props.theme
+      ? "none"
+      : !props.completed && props.theme
+      ? "1px solid #e3e4f1"
+      : props.completed && !props.theme
+      ? "1px solid #393A4B"
+      : "1px solid #393A4B"};
+
+    @media screen and (min-width: 768px) {
+      min-width: 24px;
+      min-height: 24px;
+    }
+  `
 );

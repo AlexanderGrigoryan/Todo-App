@@ -1,7 +1,6 @@
 import { createGlobalStyle, css } from "styled-components";
 
-const GlobalStyles = createGlobalStyle(
-  (props: { theme: boolean }) => css`
+const GlobalStyles = createGlobalStyle`
     * {
       margin: 0;
       padding: 0;
@@ -12,11 +11,5 @@ const GlobalStyles = createGlobalStyle(
       font-family: "Josefin Sans", sans-serif;
     }
 
-    .App {
-      width: 100vw;
-      height: 100vh;
-    }
-  `
-);
-
+  `;
 export default GlobalStyles;

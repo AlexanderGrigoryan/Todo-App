@@ -2,8 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 import CheckBox from "./CheckBox";
 import deleteIcon from "../img/icon-cross-small.svg";
+import deleteIconBig from "../img/icon-cross.svg";
 import { Todo } from "../types";
-import { useState } from "react";
 
 interface Props {
   todoList: Todo[];
@@ -40,6 +40,7 @@ function TodoList(props: Props) {
           </ContentInner>
           <Delete onClick={deleteTodo}>
             <Icon src={deleteIcon} alt="delete icon" />
+            <IconBig src={deleteIconBig} alt="delete icon" />
           </Delete>
         </Content>
         <Line theme={theme}></Line>
@@ -62,15 +63,32 @@ const ContentInner = styled.div`
   align-items: center;
 `;
 
+interface NoteProps {
+  completed: boolean;
+  theme: boolean;
+}
+
 const Note = styled.p(
-  (props: { completed: boolean }) => css`
+  (props: NoteProps) => css`
     font-family: "Josefin Sans", sans-serif;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 18px;
-    letter-spacing: -0.25px;
-    color: ${props.completed ? "#D1D2DA" : "#494c6b"};
+    line-height: 12px;
+    letter-spacing: -0.1666666716337204px;
     text-decoration: ${props.completed ? "line-through" : "none"};
+    color: ${!props.completed && props.theme
+      ? "#4D5067"
+      : !props.completed && !props.theme
+      ? "#D1D2DA"
+      : props.theme
+      ? "#C8CBE7"
+      : "#494C6B"};
+
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+      line-height: 18px;
+      letter-spacing: -0.25px;
+    }
   `
 );
 
@@ -85,11 +103,24 @@ const Delete = styled.button`
   align-items: center;
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img`
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const IconBig = styled.img`
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+`;
 
 const Line = styled.div(
   (props) => css`
-    width: 327px;
+    width: 100%;
+    max-width: 540px;
     height: 1px;
     background: ${typeof props.theme === "boolean" && props.theme
       ? "#393A4B"
