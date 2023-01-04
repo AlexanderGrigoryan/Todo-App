@@ -27,7 +27,6 @@
 - <img src="readme/react.png" width="25" style="top: 8px" /> _React @ 18.2.0 - front-end framework_
 - <img src="readme/styled-components.png" width="25" style="top: 8px"/> _Styled-components @ 5.3.6 - for styles_
 - <img src="readme/react-helmet.jpeg" width="25" style="top: 8px" /> _React-helmet @6.1.0 - library adding information in head_
-- 
 
 #
 
