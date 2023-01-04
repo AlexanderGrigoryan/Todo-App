@@ -77,12 +77,12 @@ const Note = styled.p(
     letter-spacing: -0.1666666716337204px;
     text-decoration: ${props.completed ? "line-through" : "none"};
     color: ${!props.completed && props.theme
-      ? "#4D5067"
-      : !props.completed && !props.theme
+      ? "#494C6B"
+      : props.completed && !props.theme
       ? "#D1D2DA"
-      : props.theme
-      ? "#C8CBE7"
-      : "#494C6B"};
+      : props.theme && props.completed
+      ? "#4D5067"
+      : "#C8CBE7"};
 
     @media screen and (min-width: 768px) {
       font-size: 18px;
